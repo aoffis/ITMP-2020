@@ -9,59 +9,45 @@
 <body class="paper">
 	<div id="app">
 		<input type="number" v-model='n'>
+		<input type="number" v-model='row'>
 		<div class="space"></div>
 		<h3>สูตรคูณแม่ {{n}}</h3>
-		<h4 v-for='i in 12'>
+		<h3>แม่ก่อนหน้า {{before_n}}</h3>
+		<h4 v-for='i in r'>
 			{{n}} x {{i}} = {{x(i)}}</h4>
-		
+		<h4 type="number">ผลรวม : {{sum(r)}}</h4>
 	</div>
 
 	<script>
 		let app = new Vue({
 			el:'#app',
 			data: {
-				n:2
+				n:2,
+				before_n:1,
+				row:12
 			},
 			methods: {
 				x: function(row){
 					return this.n*row
+				},
+				sum: function(row){
+					allsum = 0
+					for (let i=1; i <= row; i++ ){
+						allsum += this.n*i
+					}
+					return allsum
 				}
 			},
 			computed: {
-				x2: function(){
-					return this.n*2
-				},
-				x3: function(){
-					return this.n*3
-				},
-				x4: function(){
-					return this.n*4
-				},
-				x5: function(){
-					return this.n*5
-				},
-				x6: function(){
-					return this.n*6
-				},
-				x7: function(){
-					return this.n*7
-				},
-				x8: function(){
-					return this.n*8
-				},
-				x9: function(){
-					return this.n*9
-				},
-				x10: function(){
-					return this.n*10
-				},
-				x11: function(){
-					return this.n*11
-				},
-				x12: function(){
-					return this.n*12
+				r: function(){
+					return parseInt(this.row)
 				}
 				
+			},
+			watch: {
+				n: function(a, b){
+					this.before_n = b
+				}
 			}
 		})
 	</script>
