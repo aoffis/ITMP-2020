@@ -5,17 +5,20 @@
 	<link rel=stylesheet href="../src/reset.css">
 	<link rel=stylesheet href="lab.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 </head>
-<body class="paper">
-	<div id="app">
-		<input type="number" v-model='n'>
-		<input type="number" v-model='row'>
-		<div class="space"></div>
-		<h3>สูตรคูณแม่ {{n}}</h3>
-		<h3>แม่ก่อนหน้า {{before_n}}</h3>
-		<h4 v-for='i in r'>
+<body class="max-w-sm mx-auto bg-gray-400 shadow-lg rounded-lg">
+	<div id="app" class="max-w-sm mx-auto p-6 bg-white rounded-lg shadow-xl mt-10">
+		<h3 class="text-xl text-gray-800 leading-tight">สูตรคูณแม่ {{n}}</h3>
+		<h3 class="text-l text-gray-600 leading-normal">แม่ก่อนหน้า {{before_n}}</h3>
+		<input type="number" v-model='n' class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2 mt-3">
+		<input type="number" v-model='row'class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4">
+
+		<h4 class="text-l text-gray-800 leading-normal" v-for='i in r'>
 			{{n}} x {{i}} = {{x(i)}}</h4>
-		<h4 type="number">ผลรวม : {{sum(r)}}</h4>
+		<h4 class="text-xl text-gray-600 leading-normal mt-3" type="number">ผลรวม : {{sum(r)}}</h4>
+		
 	</div>
 
 	<script>
@@ -42,6 +45,7 @@
 				r: function(){
 					return parseInt(this.row)
 				}
+
 				
 			},
 			watch: {
