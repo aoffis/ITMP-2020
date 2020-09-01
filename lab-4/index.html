@@ -24,7 +24,7 @@
 					'--l':l+'%'
 				}"
 				:data-pick="i == pick"
-				@click="check"
+				@click="check(i)"
 				></a-dot>
 			</main>
 		</section>
@@ -52,13 +52,13 @@
 				time: 10, //เวลาเริ่มต้น
 				score: 0, //คะแนนเริ่มต้น
 				pick: 1, //หมายเลขวงกลมที่จะสีแตกต่างจากก้อนอื่นๆ
-				l: 30,//ความสว่างของสีทั่วไปในรอบนี้
+				l: 50,//ความสว่างของสีทั่วไปในรอบนี้
 			},
 			methods: {
 				check: function(e){
 					console.log(e)
-					console.log(e.target)
-					console.log(e.target.dataset.pick)
+					//console.log(e.target)
+					//console.log(e.target.dataset.pick)
 				}
 			}
 		})
