@@ -13,7 +13,7 @@
 		<section id="canvas_header">
 			<div>
 				<h2>เหลือเวลา {{time}} วินาที</h2>
-				<p>Combo Streaks {{combo}}</p>
+				<h1>คอมโบ {{combo}}</h1>
 			</div>
 		</section>
 		<section id="canvas_main">
@@ -59,25 +59,33 @@
 					console.log(e)
 					if (this.time > 0) {
 						if (e) {
-							this.score++
-							this.time += 2
-							this.combo++
-							this.ct = 3
 							this.correct()
-						} else
-							this.time--
-						this.correct()
+							
+						} else {
+							this.incorrect()
+						}
 					}
 					//console.log(e.target)
 					//console.log(e.target.dataset.pick)
 				},
 				correct: function () {
 					this.row = rand(2, 6)
+					this.h = rand(0, 359)
+					this.score++
+					this.time += 2
+					this.combo++
+					this.ct = 3
 					this.pick = rand(1, this.row * this.row)
-					this.h = rand(0, 360)
-					this.l = rand(40, 60)
+					this.l--
 					console.log('Correct !@3#@!')
-				}
+				},
+				incorrect: function () {
+					this.combo = 0
+					this.ct = 0
+					this.time--
+					this.pick = rand(1, this.row * this.row)
+
+				},
 			}
 		})
 		//ทำให้แคนวาสมี --picklight ตามที่กำหนดไว้ข้างบนนี้
