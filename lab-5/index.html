@@ -20,10 +20,7 @@
 				<div class="box _path" v-for="i in 14" :data-pst="i"></div>
 				<div class="box _toggle" data-pst="10" :data-isrightarrow="isRightArrow"></div>
 
-				<div class="box _fruit" v-for="f in fruits" 
-				:data-pst="f.pst" 
-				:data-type="f.type"
-				></div>
+				<div class="box _fruit" v-for="f in fruits" :data-pst="f.pst" :data-type="f.type"></div>
 
 				<div class="box _origin"></div>
 				<div class="box _12" data-pst="12"></div>
@@ -65,11 +62,11 @@
 				]
 			},
 			methods: {
-				click: function(){
-					if(this.isRightArrow == 1){
+				click: function () {
+					if (this.isRightArrow == 1) {
 						this.isRightArrow = 0
 						console.log("isRightArrow = 0")
-					}else if (this.isRightArrow == 0){
+					} else if (this.isRightArrow == 0) {
 						this.isRightArrow = 1
 						console.log("isRightArrow = 1")
 					}
@@ -79,31 +76,38 @@
 			watch: {
 				turn: function (x) {
 					let count = this.fruits.length
+
 					for (let f in this.fruits) {
 						let run = this.fruits[f].run
 						if (run) {
 							this.fruits[f].pst += this.fruits[f].step
 						}//  เดิน
-						if (this.fruits[f].pst == 11 && this.isRightArrow == 1){
+						if (this.fruits[f].pst == 11 && this.isRightArrow == 1) {
 							this.fruits[f].pst = 13
 							this.fruits[f].step = 3
 						}// สลับสี
 						if (this.fruits[f].pst == 12 || this.fruits[f].pst == 16) {
-							if(this.fruits[f].pst == 16 && this.fruits[f].type == "yellow"){
-								console.log("Collect @#@As")
+							if (this.fruits[f].pst == 16 && this.fruits[f].type == "yellow") {
+								//console.log("Collect @#@As")
 								this.fruits[f].run = false
-							}else if(this.fruits[f].pst == 12 && this.fruits[f].type == "red"){
-								console.log("Collect @#@As")
+							} else if (this.fruits[f].pst == 12 && this.fruits[f].type == "red") {
+								//console.log("Collect @#@As")
 								this.fruits[f].run = false
-							}else{
+							} else {
 								clearInterval(playing)
 								this.play = false
 							}//ผิดจบเกม
-							
 						}// หยุด
-						console.log(this.fruits[f].pst)
-
+						//console.log(this.fruits[f].pst)
 					}
+					if (rand(1, 10) % 3 == 1) {
+						this.fruits.push({ id: fruitCount, type: 'red', pst: 1, run: true, step: 1 })
+						fruitCount++
+					} else if (rand(1, 10) % 3 == 0) {
+						this.fruits.push({ id: fruitCount, type: 'yellow', pst: 1, run: true, step: 1 })
+						fruitCount++
+					}
+					console.log(fruitCount)
 				}
 			}
 		})
