@@ -12,7 +12,7 @@
 	<div id="canvas">
 		<section id="canvas_header">
 			<div>
-				-- แสดงคะแนน
+				{{score}} แสดงคะแนน
 			</div>
 		</section>
 		<section id="canvas_main" :data-play="play">
@@ -79,11 +79,15 @@
 					for (let f in this.fruits) {
 						let run = this.fruits[f].run
 						if (run) {
-							this.fruits[f].pst++
-						}
+							this.fruits[f].pst += this.fruits[f].step
+						}//  เดิน
+						if (this.fruits[f].pst == 11 && this.isRightArrow == 1){
+							this.fruits[f].pst = 13
+							this.fruits[f].step = 3
+						}// เช็คสี
 						if (this.fruits[f].pst == 12 || this.fruits[f].pst == 16) {
 							this.fruits[f].run = false
-						}
+						}// หยุด
 						console.log(this.fruits[f].pst)
 
 					}
