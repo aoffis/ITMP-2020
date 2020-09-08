@@ -32,8 +32,8 @@
 			<div v-if="play" class="btn" id="toggle" @click="click()">
 				Toggle
 			</div>
-			<div v-if="!play" class="btn" id="endgame">
-				End Game
+			<div v-if="!play" class="btn" id="endgame" onclick="window.location.reload()">
+				Restart
 			</div>
 		</section>
 	</div>
@@ -70,11 +70,11 @@
 						this.isRightArrow = 1
 						console.log("isRightArrow = 1")
 					}
-				}
+				},
 			},
 			computed: {},
 			watch: {
-				turn: function (x) {
+				turn: function () {
 					let count = this.fruits.length
 
 					for (let f in this.fruits) {
@@ -87,13 +87,20 @@
 							this.fruits[f].step = 3
 						}// สลับสี
 						if (this.fruits[f].pst == 12 || this.fruits[f].pst == 16) {
-							if (this.fruits[f].pst == 16 && this.fruits[f].type == "yellow") {
+							if (this.fruits[f].pst == 16 && this.fruits[f].type == "yellow" && this.fruits[f].run == true) {
 								//console.log("Collect @#@As")
+								this.score++
 								this.fruits[f].run = false
-							} else if (this.fruits[f].pst == 12 && this.fruits[f].type == "red") {
+
+							} else if (this.fruits[f].pst == 12 && this.fruits[f].type == "red" && this.fruits[f].run == true) {
 								//console.log("Collect @#@As")
+								this.score++
 								this.fruits[f].run = false
-							} else {
+
+							} else if (this.fruits[f].pst == 12 && this.fruits[f].type == "yellow") {
+								clearInterval(playing)
+								this.play = false
+							} else if (this.fruits[f].pst == 16 && this.fruits[f].type == "red") {
 								clearInterval(playing)
 								this.play = false
 							}//ผิดจบเกม
@@ -107,7 +114,7 @@
 						this.fruits.push({ id: fruitCount, type: 'yellow', pst: 1, run: true, step: 1 })
 						fruitCount++
 					}
-					console.log(fruitCount)
+					console.log(this.speed)
 				}
 			}
 		})
